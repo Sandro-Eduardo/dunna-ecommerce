@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#eee8dc">
+<title>Velas — DUNNA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   1. VARIÁVEIS DE CORES E RESET BÁSICO
+   ========================================================= */
+:root {
+  --cream: #eee8dc;
+  --paper: #f8f5ef;
+  --ink: #302b25;
+  --muted: #82796e;
+  --gold: #b99c72;
+  --line: rgba(48, 43, 37, .17);
+  --white: #fffaf1;
+}
+.dunna-logo {
+    display:block;width:100%;
+    height:auto;overflow:visible
+}
+
+.dunna-logo g {
+    fill:none;
+    stroke:currentColor;
+    stroke-width:15;
+    stroke-linecap:round;
+    stroke-linejoin:round
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "DM Sans", sans-serif;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+select {
+  font: inherit;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 300;
+}
+
+/* =========================================================
+   2. CABEÇALHO E MENU SUPERIOR — alinhado ao index
+   ========================================================= */
+.header {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 108px;
+  padding: 0 6%;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  border-bottom: 1px solid rgba(48, 43, 37, .1);
+  background: var(--paper);
+}
+
+.brand {
+  justify-self: start;
+  display: block;
+  width: clamp(100px, 9vw, 132px);
+  color: var(--ink);
+  line-height: 0;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(27px, 3.5vw, 52px);
+}
+
+.navigation a {
+  position: relative;
+  color: var(--ink);
+  font-size: 17px;
+  font-weight: 300;
+  letter-spacing: .055em;
+  white-space: nowrap;
+  transition: opacity .35s ease;
+}
+
+.navigation a:hover { opacity: .72; }
+
+.navigation a:after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  height: 1px;
+  width: 0;
+  background: currentColor;
+  transition: width .35s ease;
+}
+
+.navigation a:hover:after { width: 100%; }
+
+.header-actions {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.icon-button {
+  width: 25px;
+  height: 29px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  opacity: .9;
+  transition: opacity .3s ease, transform .3s ease;
+}
+
+.icon-button:hover { opacity: 1; transform: translateY(-2px); }
+
+.icon-button svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.15;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* =========================================================
+   3. ESTRUTURA DA PÁGINA E TÍTULO (.page, .page-heading)
+   ========================================================= */
+.page {
+  max-width: 1600px;
+  margin: auto;
+  padding: 34px 6% 100px;
+}
+
+.breadcrumb {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: #92897c;
+  font-size: 8px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.breadcrumb a:hover {
+  color: var(--ink);
+}
+
+.page-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 25px;
+  padding: 35px 0 28px;
+  border-bottom: 1px solid var(--line);
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #a18a69;
+  font-size: 8px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+}
+
+.eyebrow:before {
+  content: "";
+  width: 25px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.page-heading h1 {
+  margin-top: 10px;
+  font-size: clamp(55px, 7vw, 83px);
+  line-height: .88;
+  letter-spacing: -.035em;
+}
+
+.page-heading p {
+  max-width: 330px;
+  padding-bottom: 4px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.9;
+}
+
+/* =========================================================
+   4. COLUNA DE FILTROS LATERAIS (.sidebar)
+   ========================================================= */
+.catalog-layout {
+  display: grid;
+  grid-template-columns: 205px minmax(0, 1fr);
+  gap: 48px;
+  padding-top: 34px;
+}
+
+.sidebar {
+  border-right: 1px solid var(--line);
+  padding-right: 27px;
+}
+
+.filter-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+  font-size: 9px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.clear-filters {
+  border: 0;
+  background: none;
+  color: #9a8465;
+  font-size: 8px;
+  letter-spacing: .08em;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.filter-group {
+  padding: 21px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.filter-group h3 {
+  margin-bottom: 14px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.filter-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 11px 0;
+  color: #71695f;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.filter-option input {
+  width: 13px;
+  height: 13px;
+  accent-color: #897452;
+  cursor: pointer;
+}
+
+.filter-option small {
+  margin-left: auto;
+  color: #a49a8d;
+  font-size: 8px;
+}
+
+.price-fields {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+
+.price-fields input {
+  width: calc(50% - 8px);
+  min-width: 0;
+  height: 34px;
+  padding: 0 8px;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  color: var(--ink);
+  font-size: 9px;
+}
+
+.price-fields span {
+  color: #a49a8d;
+  font-size: 9px;
+}
+
+.filter-mobile {
+  display: none;
+}
+
+/* =========================================================
+   5. GRADE E CARDS DE PRODUTOS (.grid, .product)
+   ========================================================= */
+.products-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 22px;
+}
+
+.results-count {
+  color: #82796e;
+  font-size: 9px;
+  letter-spacing: .08em;
+}
+
+.results-count strong {
+  color: var(--ink);
+  font-weight: 400;
+}
+
+.sort {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #82796e;
+  font-size: 9px;
+}
+
+.sort select {
+  padding: 8px 25px 8px 9px;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  color: var(--ink);
+  font-size: 9px;
+  outline: none;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 35px 20px;
+}
+
+.product {
+  min-width: 0;
+}
+
+.photo {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  background: #e9e1d5;
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .8s cubic-bezier(.2, .7, .2, 1);
+}
+
+.product:hover .photo img {
+  transform: scale(1.045);
+}
+
+.tag {
+  position: absolute;
+  top: 13px;
+  left: 13px;
+  padding: 7px 10px;
+  background: rgba(248, 245, 239, .8);
+  backdrop-filter: blur(10px);
+  color: #6f604b;
+  font-size: 7px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.tag.sold {
+  background: rgba(48, 43, 37, .76);
+  color: white;
+}
+
+.quick-add {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(255, 255, 255, .8);
+  border-radius: 50%;
+  background: rgba(248, 245, 239, .68);
+  backdrop-filter: blur(8px);
+  color: var(--ink);
+  font-size: 18px;
+  cursor: pointer;
+  transition: all .25s;
+}
+
+.quick-add:hover {
+  background: var(--ink);
+  color: var(--white);
+}
+
+.product-info {
+  padding: 14px 1px 0;
+}
+
+.product-line {
+  color: #a18a69;
+  font-size: 7px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.product-name {
+  display: block;
+  margin-top: 6px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 25px;
+  line-height: 1.05;
+}
+
+.product-price {
+  display: block;
+  margin-top: 8px;
+  color: #5f584f;
+  font-size: 10px;
+  letter-spacing: .02em;
+}
+
+.product-note {
+  margin-top: 6px;
+  color: #9a9186;
+  font-size: 8px;
+}
+
+.empty {
+  display: none;
+  padding: 70px 20px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+/* =========================================================
+   6. RODAPÉ (.footer)
+   ========================================================= */
+.footer {
+  padding: 38px 6% 28px;
+  background: #302b25;
+  color: var(--cream);
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid rgba(255, 250, 241, .17);
+}
+
+.footer-logo {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 38px;
+  letter-spacing: .08em;
+}
+
+.footer-copy {
+  max-width: 280px;
+  color: rgba(255, 250, 241, .58);
+  font-size: 9px;
+  line-height: 1.9;
+  text-align: right;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding-top: 18px;
+  color: rgba(255, 250, 241, .45);
+  font-size: 7px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   7. RESPONSIVIDADE (TABLETS, CELULARES E ACESSIBILIDADE)
+   ========================================================= */
+@media (max-width: 1050px) {
+  .header {
+    padding: 0 4%;
+    height: 96px;
+  }
+
+  .brand {
+    width: 112px;
+  }
+
+  .navigation {
+    gap: 19px;
+  }
+
+  .navigation a {
+    font-size: 12px;
+    letter-spacing: .035em;
+  }
+
+  .header-actions {
+    gap: 19px;
+  }
+
+  .catalog-layout {
+    grid-template-columns: 175px minmax(0, 1fr);
+    gap: 30px;
+  }
+
+  .grid {
+    gap: 28px 14px;
+  }
+}
+
+@media (max-width: 720px) {
+  .header {
+    height: 76px;
+    padding: 0 6%;
+    grid-template-columns: 1fr auto;
+  }
+
+  .brand {
+    width: 105px;
+  }
+
+  .navigation {
+    display: none;
+  }
+
+  .header-actions {
+    gap: 17px;
+  }
+
+  .icon-button {
+    width: 23px;
+    height: 27px;
+  }
+
+  .page {
+    padding: 25px 6% 75px;
+  }
+
+  .page-heading {
+    display: block;
+    padding: 27px 0 22px;
+  }
+
+  .page-heading h1 {
+    font-size: 66px;
+  }
+
+  .page-heading p {
+    margin-top: 15px;
+    max-width: 360px;
+  }
+
+  .catalog-layout {
+    display: block;
+    padding-top: 20px;
+  }
+
+  .filter-mobile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 13px 0;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    background: none;
+    color: var(--ink);
+    font-size: 8px;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .sidebar {
+    display: none;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    padding: 0 0 15px;
+  }
+
+  .sidebar.open {
+    display: grid;
+grid-template-columns: repeat(2, minmax(0, 1fr));
+column-gap: 20px;
+}
+.filter-heading {
+grid-column: 1 / -1;
+padding: 17px 0;
+}
+.filter-group {
+padding: 15px 0;
+}
+.products-top {
+margin: 20px 0 17px;
+}
+.sort {
+gap: 5px;
+}
+.sort select {
+font-size: 8px;
+padding-right: 15px;
+}
+.grid {
+grid-template-columns: repeat(2, minmax(0, 1fr));
+gap: 28px 12px;
+}
+.photo {
+aspect-ratio: 3 / 4;
+}
+.tag {
+top: 9px;
+left: 9px;
+padding: 6px 8px;
+font-size: 6px;
+}
+.quick-add {
+right: 9px;
+bottom: 9px;
+width: 32px;
+height: 32px;
+}
+.product-info {
+padding-top: 11px;
+}
+.product-name {
+font-size: 23px;
+}
+.product-price {
+font-size: 9px;
+}
+.footer {
+padding: 32px 6% 22px;
+}
+.footer-top {
+display: block;
+}
+.footer-copy {
+margin-top: 9px;
+text-align: left;
+}
+.footer-bottom {
+font-size: 6px;
+}
+}
+@media (max-width: 370px) {
+.grid {
+grid-template-columns: 1fr;
+}
+.photo {
+aspect-ratio: 4 / 4.5;
+}
+.sidebar.open {
+grid-template-columns: 1fr;
+}
+}
+@media (prefers-reduced-motion: reduce) {
+* {
+scroll-behavior: auto !important;
+transition-duration: .01ms !important;
+}
+}
+</style>
+</head>
+<body>
+
+  <!-- =========================================================
+       1. CABEÇALHO E MENU SUPERIOR
+       ========================================================= -->
+  <header class="header">
+    <a class="brand" href="index.html#inicio" aria-label="DUNNA — Início">
+      <svg class="dunna-logo" viewBox="0 0 880 180" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="DUNNA">
+        <g>
+          <path d="M36 28 H94 C150 28 184 54 184 90 C184 126 150 152 94 152 H36 Z"/>
+          <path d="M234 28 V100 C234 134 258 152 294 152 C330 152 354 134 354 100 V28"/>
+          <path d="M406 152 V80 C406 46 430 28 466 28 C502 28 526 46 526 80 V152"/>
+          <path d="M578 152 V80 C578 46 602 28 638 28 C674 28 698 46 698 80 V152"/>
+          <path d="M750 152 V84 C750 48 772 28 804 28 C836 28 858 48 858 84 V152 M750 104 H858"/>
+        </g>
+      </svg>
+    </a>
+
+    <nav class="navigation" aria-label="Navegação principal">
+      <a href="index.html#inicio">Início</a>
+      <a href="index.html#colecoes">Coleções</a>
+      <a href="index.html#kits">Monte seu kit</a>
+      <a href="index.html#marca">A DUNNA</a>
+      <a href="index.html#contato">Contato</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="icon-button" aria-label="Buscar"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.5"></circle><path d="m16 16 4.5 4.5"></path></svg></button>
+      <button class="icon-button" aria-label="Minha conta"><svg viewBox="0 0 24 24"><circle cx="12" cy="7.5" r="3.5"></circle><path d="M4.5 21c.4-4.2 3.2-6.5 7.5-6.5s7.1 2.3 7.5 6.5"></path></svg></button>
+      <button class="icon-button" aria-label="Sacola"><svg viewBox="0 0 24 24"><path d="M5 8h14l1 13H4L5 8Z"></path><path d="M9 9V6a3 3 0 0 1 6 0v3"></path></svg></button>
+    </div>
+  </header>
+
+  <!-- =========================================================
+       2. CONTEÚDO PRINCIPAL
+       ========================================================= -->
+  <main class="page">
+    <!-- Caminho de navegação (Breadcrumb) -->
+    <div class="breadcrumb">
+      <a href="index.html">Início</a>
+      <span>/</span>
+      <span>Velas</span>
+    </div>
+
+    <!-- Título da Página -->
+    <section class="page-heading">
+      <div>
+        <span class="eyebrow">A coleção DUNNA</span>
+        <h1>Velas</h1>
+      </div>
+      <p>Encontre sua fragrância favorita e transforme pequenos momentos em rituais.</p>
+    </section>
+
+    <div class="catalog-layout">
+      <!-- =====================================================
+           3. BARRA LATERAL DE FILTROS
+           ===================================================== -->
+      <aside class="sidebar" id="sidebar">
+        <div class="filter-heading">
+          <span>Filtrar por</span>
+          <button class="clear-filters" id="clearFilters">Limpar</button>
+        </div>
+
+        <div class="filter-group">
+          <h3>Linha</h3>
+          <label class="filter-option">
+            <input type="checkbox" name="line" value="Gold" checked> Gold <small>7</small>
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" name="line" value="Bless"> Bless
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" name="line" value="Basic"> Basic
+          </label>
+        </div>
+
+        <div class="filter-group">
+          <h3>Fragrância</h3>
+          <label class="filter-option">
+            <input type="checkbox" name="scent" value="Chá Branco"> Chá Branco
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" name="scent" value="Frutas Tropicais"> Frutas Tropicais
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" name="scent" value="Champagne Rosé"> Champagne Rosé
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" name="scent" value="Cereja e Avelã"> Cereja e Avelã
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" name="scent" value="Lavanda Imperial"> Lavanda Imperial
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" name="scent" value="Bamboo Oriental"> Bamboo Oriental
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" name="scent" value="White Jasmin"> White Jasmin
+          </label>
+        </div>
+
+        <div class="filter-group">
+          <h3>Disponibilidade</h3>
+          <label class="filter-option">
+            <input type="checkbox" id="availableOnly"> Em estoque
+          </label>
+        </div>
+      </aside>
+
+      <!-- =====================================================
+           4. VITRINE / GRADE DE PRODUTOS
+           ===================================================== -->
+      <section class="listing" aria-label="Produtos">
+        <button class="filter-mobile" id="toggleFilters">Filtros <span>＋</span></button>
+
+        <div class="products-top">
+          <span class="results-count"><strong id="resultCount">7</strong> produtos</span>
+          <label class="sort">
+            Ordenar por
+            <select id="sort">
+              <option value="featured">Destaques</option>
+              <option value="name">Nome</option>
+              <option value="price-asc">Menor preço</option>
+              <option value="price-desc">Maior preço</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="grid" id="grid">
+          <!-- Produto 1 -->
+          <article class="product" data-line="Gold" data-scent="Chá Branco" data-price="69.90" data-stock="true" data-name="Vela Gold Chá Branco">
+            <a class="photo" href="produto-vela-gold-cha-branco.html">
+              <img src="https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=900&q=85" alt="Vela Gold Chá Branco" loading="lazy">
+              <span class="tag">Gold</span>
+              <button class="quick-add" type="button" aria-label="Ver Vela Gold Chá Branco">↗</button>
+            </a>
+            <div class="product-info">
+              <span class="product-line">Vela Gold</span>
+              <a class="product-name" href="produto-vela-gold-cha-branco.html">Chá Branco</a>
+              <span class="product-price">R$ 69,90</span>
+            </div>
+          </article>
+
+          <!-- Produto 2 -->
+          <article class="product" data-line="Gold" data-scent="Frutas Tropicais" data-price="69.90" data-stock="true" data-name="Vela Gold Frutas Tropicais">
+            <a class="photo" href="produto-vela-gold-frutas-tropicais.html">
+              <img src="https://images.unsplash.com/photo-1602874801007-bd458bb1b8b6?auto=format&fit=crop&w=900&q=85" alt="Vela Gold Frutas Tropicais" loading="lazy">
+              <span class="tag">Gold</span>
+              <button class="quick-add" type="button" aria-label="Ver Vela Gold Frutas Tropicais">↗</button>
+            </a>
+            <div class="product-info">
+              <span class="product-line">Vela Gold</span>
+              <a class="product-name" href="produto-vela-gold-frutas-tropicais.html">Frutas Tropicais</a>
+              <span class="product-price">R$ 69,90</span>
+            </div>
+          </article>
+
+          <!-- Produto 3 (Esgotado) -->
+          <article class="product" data-line="Gold" data-scent="Champagne Rosé" data-price="69.90" data-stock="false" data-name="Vela Gold Champagne Rosé">
+            <a class="photo" href="produto-vela-gold-champagne-rose.html">
+              <img src="https://images.unsplash.com/photo-1602523961358-f9f03dd557db?auto=format&fit=crop&w=900&q=85" alt="Vela Gold Champagne Rosé" loading="lazy">
+              <span class="tag sold">Esgotado</span>
+            </a>
+            <div class="product-info">
+              <span class="product-line">Vela Gold</span>
+              <a class="product-name" href="produto-vela-gold-champagne-rose.html">Champagne Rosé</a>
+              <span class="product-price">R$ 69,90</span>
+              <p class="product-note">Indisponível no momento</p>
+            </div>
+          </article>
+
+          <!-- Produto 4 -->
+          <article class="product" data-line="Gold" data-scent="Cereja e Avelã" data-price="69.90" data-stock="true" data-name="Vela Gold Cereja e Avelã">
+            <a class="photo" href="produto-vela-gold-cereja-e-avela.html">
+              <img src="https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=900&q=85" alt="Vela Gold Cereja e Avelã" loading="lazy">
+              <span class="tag">Gold</span>
+              <button class="quick-add" type="button" aria-label="Ver Vela Gold Cereja e Avelã">↗</button>
+            </a>
+            <div class="product-info">
+              <span class="product-line">Vela Gold</span>
+              <a class="product-name" href="produto-vela-gold-cereja-e-avela.html">Cereja e Avelã</a>
+              <span class="product-price">R$ 69,90</span>
+            </div>
+          </article>
+
+          <!-- Produto 5 -->
+          <article class="product" data-line="Gold" data-scent="Lavanda Imperial" data-price="69.90" data-stock="true" data-name="Vela Gold Lavanda Imperial">
+            <a class="photo" href="produto-vela-gold-lavanda-imperial.html">
+              <img src="https://images.unsplash.com/photo-1602874801007-bd458bb1b8b6?auto=format&fit=crop&w=900&q=85" alt="Vela Gold Lavanda Imperial" loading="lazy">
+              <span class="tag">Gold</span>
+              <button class="quick-add" type="button" aria-label="Ver Vela Gold Lavanda Imperial">↗</button>
+            </a>
+            <div class="product-info">
+              <span class="product-line">Vela Gold</span>
+              <a class="product-name" href="produto-vela-gold-lavanda-imperial.html">Lavanda Imperial</a>
+              <span class="product-price">R$ 69,90</span>
+            </div>  
+          </article>
+                    <!-- Produto 6 -->
+          <article class="product" data-line="Gold" data-scent="Bamboo Oriental" data-price="69.90" data-stock="true" data-name="Vela Gold Bamboo Oriental">
+            <a class="photo" href="produto-vela-gold-bamboo-oriental.html">
+              <img src="https://unsplash.com" alt="Vela Gold Bamboo Oriental" loading="lazy">
+              <span class="tag">Gold</span>
+              <button class="quick-add" type="button" aria-label="Ver Vela Gold Bamboo Oriental">↗</button>
+            </a>
+            <div class="product-info">
+              <span class="product-line">Vela Gold</span>
+              <a class="product-name" href="produto-vela-gold-bamboo-oriental.html">Bamboo Oriental</a>
+              <span class="product-price">R$ 69,90</span>
+            </div>
+          </article>
+
+          <!-- Produto 7 -->
+          <article class="product" data-line="Gold" data-scent="White Jasmin" data-price="69.90" data-stock="true" data-name="Vela Gold White Jasmin">
+            <a class="photo" href="produto-vela-gold-white-jasmin.html">
+              <img src="https://unsplash.com" alt="Vela Gold White Jasmin" loading="lazy">
+              <span class="tag">Gold</span>
+              <button class="quick-add" type="button" aria-label="Ver Vela Gold White Jasmin">↗</button>
+            </a>
+            <div class="product-info">
+              <span class="product-line">Vela Gold</span>
+              <a class="product-name" href="produto-vela-gold-white-jasmin.html">White Jasmin</a>
+              <span class="product-price">R$ 69,90</span>
+            </div>
+          </article>
+        </div>
+
+        <!-- Mensagem exibida quando nenhum filtro corresponde -->
+        <p class="empty" id="emptyState">Nenhuma vela encontrada com os filtros selecionados.</p>
+      </section>
+    </div>
+  </main>
+
+  <!-- =========================================================
+       5. RODAPÉ (FOOTER)
+       ========================================================= -->
+  <footer class="footer" id="contato">
+    <div class="footer-top">
+      <div class="footer-logo">DUNNA</div>
+      <p class="footer-copy">
+        Velas aromáticas artesanais feitas para transformar ambientes e criar memórias sensoriais únicas.
+      </p>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 DUNNA — Todos os direitos reservados</span>
+      <span>Feito artesanalmente no Brasil</span>
+    </div>
+  </footer>
+
+  <script>
+  /* =========================================================
+     1. SELEÇÃO DOS ELEMENTOS DA PÁGINA
+     ========================================================= */
+  const grid = document.getElementById("grid");
+  const items = [...grid.querySelectorAll(".product")];
+  const filters = [...document.querySelectorAll('.sidebar input[type="checkbox"]')];
+  const count = document.getElementById("resultCount");
+  const empty = document.getElementById("emptyState");
+  const sort = document.getElementById("sort");
+
+  /* =========================================================
+     2. FUNÇÃO PRINCIPAL DE FILTRAGEM
+     ========================================================= */
+  function applyFilters() {
+    // Pega as linhas e fragrâncias marcadas nos checkboxes
+    const selectedLines = filters
+      .filter(x => x.name === "line" && x.checked)
+      .map(x => x.value);
+
+    const selectedScents = filters
+      .filter(x => x.name === "scent" && x.checked)
+      .map(x => x.value);
+
+    // Verifica se "Em estoque" está marcado
+    const stock = document.getElementById("availableOnly").checked;
+
+    let visible = 0;
+
+    // Passa por cada card de produto verificando se bate com os filtros
+    items.forEach(item => {
+      const lineOk = selectedLines.length === 0 || selectedLines.includes(item.dataset.line);
+      const scentOk = selectedScents.length === 0 || selectedScents.includes(item.dataset.scent);
+      const stockOk = !stock || item.dataset.stock === "true";
+
+      const show = lineOk && scentOk && stockOk;
+
+      item.hidden = !show;
+      if (show) visible++;
+    });
+
+    // Atualiza o contador e exibe/esconde a mensagem de "vazio"
+    count.textContent = visible;
+    empty.style.display = visible ? "none" : "block";
+  }
+
+  /* =========================================================
+     3. EVENTOS DE FILTRO E LIMPAR
+     ========================================================= */
+  filters.forEach(input => input.addEventListener("change", applyFilters));
+
+  document.getElementById("clearFilters").addEventListener("click", () => {
+    filters.forEach(input => (input.checked = false));
+    applyFilters();
+  });
+
+  /* =========================================================
+     4. ORDENAÇÃO DOS PRODUTOS (NOME, PREÇO, DESTAQUES)
+     ========================================================= */
+  sort.addEventListener("change", () => {
+    const sorted = [...items];
+
+    if (sort.value === "name") {
+      sorted.sort((a, b) => a.dataset.name.localeCompare(b.dataset.name, "pt-BR"));
+    }
+    if (sort.value === "price-asc") {
+      sorted.sort((a, b) => Number(a.dataset.price) - Number(b.dataset.price));
+    }
+    if (sort.value === "price-desc") {
+      sorted.sort((a, b) => Number(b.dataset.price) - Number(a.dataset.price));
+    }
+    if (sort.value === "featured") {
+      sorted.sort((a, b) => items.indexOf(a) - items.indexOf(b));
+    }
+
+    sorted.forEach(item => grid.appendChild(item));
+  });
+
+  /* =========================================================
+     5. BOTÕES DE MOBILE E ACESSO RÁPIDO
+     ========================================================= */
+  // Abre e fecha o painel de filtros no celular
+  document.getElementById("toggleFilters").addEventListener("click", () => {
+    const sidebar = document.getElementById("sidebar");
+    sidebar.classList.toggle("open");
+
+    const icon = document.querySelector("#toggleFilters span");
+    icon.textContent = sidebar.classList.contains("open") ? "−" : "＋";
+  });
+
+  // Faz o botão de seta (↗) abrir o link do produto
+  document.querySelectorAll(".quick-add").forEach(button => {
+    button.addEventListener("click", e => {
+      e.preventDefault();
+      location.href = button.closest("a").href;
+    });
+  });
+
+  // Executa o filtro uma vez ao carregar a página
+  applyFilters();
+</script>
+
+</body>
+</html>
+
